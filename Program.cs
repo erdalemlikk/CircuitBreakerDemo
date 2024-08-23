@@ -14,6 +14,6 @@ builder.Services.AddControllers(options =>
 });
 var app = builder.Build();
 
-//app.UseCircuitBreaker(CircuitBreakerPolicy.GetCircuitBreakerPolicy());
+app.UseCircuitBreaker(CircuitBreakerPolicy.GetCircuitBreakerPolicy());
 app.MapControllers();
 app.Run();

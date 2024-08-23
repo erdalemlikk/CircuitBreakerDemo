@@ -1,5 +1,7 @@
 using CircuitBreakerDemo.Exceptions;
 using Polly.CircuitBreaker;
+using Serilog;
+
 namespace CircuitBreakerDemo.Middlewares.CircuitBreaker;
 
 using Polly;
@@ -15,15 +17,15 @@ public static class CircuitBreakerPolicy
                 durationOfBreak: TimeSpan.FromSeconds(15),
                 onBreak: (ex, breakDelay) =>
                 {
-                    Console.WriteLine($"Circuit breaker opened for {breakDelay.TotalSeconds} seconds due to: {ex.Message}");
+                    Log.Information($"Circuit breaker opened for {breakDelay.TotalSeconds} seconds due to: {ex.Message}");
                 },
                 onReset: () =>
                 {
-                    Console.WriteLine("Circuit breaker reset.");
+                    Log.Information("Circuit breaker reset.");
                 },
                 onHalfOpen: () =>
                 {
-                    Console.WriteLine("Circuit breaker is half-open.");
+                    Log.Information("Circuit breaker is half-open.");
                 });
     }
 }

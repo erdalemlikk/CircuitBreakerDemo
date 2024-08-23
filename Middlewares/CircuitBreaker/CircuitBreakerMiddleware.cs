@@ -1,4 +1,5 @@
 using Polly.CircuitBreaker;
+using Serilog;
 
 namespace CircuitBreakerDemo.Middlewares.CircuitBreaker;
 
@@ -31,7 +32,7 @@ public class CircuitBreakerMiddleware
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await context.Response.WriteAsync("An unexpected error occurred.");
-            Console.WriteLine($"Unexpected error: {ex.Message}");
+            Log.Error($"Unexpected error: {ex.Message}");
         }
     }
 }
